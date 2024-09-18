@@ -36,7 +36,7 @@ int main()
     int window_Width = 800;
     int window_Height = 600;
 
-    window = SDL_CreateWindow("Bubble Sort", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_Width, window_Height, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Selection Sort", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_Width, window_Height, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     bool running = true;
