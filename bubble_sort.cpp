@@ -76,7 +76,7 @@ int main()
 
             // Show to window
             SDL_RenderPresent(renderer);
-            SDL_Delay(25);
+            SDL_Delay(2);
         }
 
     // Clean up SDL resources

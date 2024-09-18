@@ -44,7 +44,7 @@ int main()
 
     SDL_RenderSetScale(renderer, 8, 6);
 
-    // Sort Algorithm
+    // Selection Sort Algorithm
     for (int i = 0; i < v.size() - 1 && running; i++)
     {
         int minIdx = i;
@@ -77,7 +77,7 @@ int main()
 
             // Show to window
             SDL_RenderPresent(renderer);
-            SDL_Delay(25);
+            SDL_Delay(1);
         }
         swap(v[i], v[minIdx]);
     }

@@ -6,48 +6,46 @@ using namespace std;
 
 #undef main
 
-void drawState(vector<int> &v, SDL_Renderer *renderer, int l, int r, int mid)
+void drawState(vector<int> &v, SDL_Renderer *renderer, int l, int r, int pivot)
 {
     for (int i = 0; i < v.size(); i++)
     {
-        if (i >= l && i < mid)
+        if (i == pivot)
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        else if (i > mid && i <= r)
+        else if (i > pivot && i <= r)
             SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+        else if (i < pivot && i >= l)
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
         else
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderDrawLine(renderer, i, 99, i, v[i]);
     }
 }
 
-void merge(vector<int> &v, int &l, int &mid, int &r, SDL_Renderer *renderer, SDL_Event &e)
+int partition(vector<int> &v, int &l, int &r, SDL_Renderer *renderer, SDL_Event &e)
 {
-    vector<int> temp;
-    int i = l, j = mid + 1;
-    while (i <= mid && j <= r)
-        if (v[i] <= v[j])
-            temp.push_back(v[i++]);
+    int pivot = v[l], i = l + 1, j = r;
+    while (i <= j)
+        if (v[i] < pivot)
+            i++;
+        else if (v[j] >= pivot)
+            j--;
         else
-            temp.push_back(v[j++]);
-    while (i <= mid)
-        temp.push_back(v[i++]);
-    while (j <= r)
-        temp.push_back(v[j++]);
+            swap(v[i], v[j]);
 
-    for (int k = l; k <= r; k++)
-        v[k] = temp[k - l];
+    swap(v[l], v[j]);
 
     while (SDL_PollEvent(&e))
     {
         if (e.type == SDL_QUIT)
         {
             SDL_Quit();
-            return;
+            return EXIT_SUCCESS;
         }
         if (e.type == SDL_KEYDOWN && (e.key.keysym.sym == SDLK_q || e.key.keysym.sym == SDLK_ESCAPE))
         {
             SDL_Quit();
-            return;
+            return EXIT_SUCCESS;
         }
     }
 
@@ -56,20 +54,21 @@ void merge(vector<int> &v, int &l, int &mid, int &r, SDL_Renderer *renderer, SDL
     SDL_RenderClear(renderer);
 
     // Draw the state of the sort
-    drawState(v, renderer, l, r, mid);
+    drawState(v, renderer, l, r, pivot);
     // Show to window
     SDL_RenderPresent(renderer);
-    SDL_Delay(79);
+    SDL_Delay(120);
+
+    return j;
 }
 
-void mergeSort(vector<int> &v, int l, int r, SDL_Renderer *renderer, SDL_Event &e)
+void quickSort(vector<int> &v, int l, int r, SDL_Renderer *renderer, SDL_Event &e)
 {
     if (l < r)
     {
-        int mid = l + (r - l) / 2;
-        mergeSort(v, l, mid, renderer, e);
-        mergeSort(v, mid + 1, r, renderer, e);
-        merge(v, l, mid, r, renderer, e);
+        int pivot = partition(v, l, r, renderer, e);
+        quickSort(v, l, pivot, renderer, e);
+        quickSort(v, pivot + 1, r, renderer, e);
     }
     return;
 }
@@ -86,19 +85,19 @@ int main()
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
-    int window_Width = 800;
-    int window_Height = 600;
+    int window_Width = 900;
+    int window_Height = 800;
 
-    window = SDL_CreateWindow("Merge Sort", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_Width, window_Height, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Quick Sort", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_Width, window_Height, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     bool running = true;
     SDL_Event e;
 
-    SDL_RenderSetScale(renderer, 8, 6);
+    SDL_RenderSetScale(renderer, 9, 8);
 
     // Sort Algorithm
-    mergeSort(v, 0, v.size() - 1, renderer, e);
+    quickSort(v, 0, v.size() - 1, renderer, e);
 
     // Clean up SDL resources
     SDL_DestroyRenderer(renderer);
