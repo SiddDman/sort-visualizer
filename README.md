@@ -2,11 +2,11 @@
 
 This project is a visualizer for several popular sorting algorithms using **C++** and **SDL2**. It demonstrates the sorting process step by step, helping to visualize how each algorithm operates. The following sorting algorithms are included:
 
-- [**Bubble Sort**](#bubble-sort)
-- [**Selection Sort**](#selection-sort)
-- [**Insertion Sort**](#insertion-sort)
-- [**Quick Sort**](#quick-sort)
-- [Merge Sort](#merge-sort)
+- [**Bubble Sort**](#1.-bubble-sort)
+- [**Selection Sort**](#2.-selection-sort)
+- [**Insertion Sort**](#3.-insertion-sort)
+- [**Quick Sort**](#4.-quick-sort)
+- [Merge Sort](#5.-merge-sort)
 
 ## How to Run
 
