@@ -20,7 +20,7 @@ g++ -o sort_visualizer main.cpp -lSDL2 -lSDL2_ttf
 ```
 
 ## Sorting Algorithms
-### 1. Bubble Sort
+### Bubble Sort
 - **Description**: Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
 - **Time Complexity**: 
   - Best: $$O(n)$$
@@ -30,7 +30,7 @@ g++ -o sort_visualizer main.cpp -lSDL2 -lSDL2_ttf
 
 ![Bubble Sort](gifs/bubble.gif)
 
-### 2. Selection Sort
+### Selection Sort
 - **Description**: Selection Sort divides the input list into two parts: a sorted part and an unsorted part. It repeatedly selects the smallest (or largest) element from the unsorted part and moves it to the end of the sorted part.
 - **Time Complexity**:
   - Best: $$O(n^2)$$
@@ -40,7 +40,7 @@ g++ -o sort_visualizer main.cpp -lSDL2 -lSDL2_ttf
 
 ![Selection Sort](gifs/selection.gif)
 
-### 3. Insertion Sort
+### Insertion Sort
 - **Description**: Insertion Sort builds a sorted array one element at a time by repeatedly taking the next element from the input data and inserting it into the correct position in the already sorted part.
 - **Time Complexity**:
   - Best: $$O(n)$$
@@ -50,7 +50,7 @@ g++ -o sort_visualizer main.cpp -lSDL2 -lSDL2_ttf
 
 ![Insertion Sort](gifs/insertion.gif)
 
-### 4. Quick Sort
+### Quick Sort
 - **Description**: Quick Sort is a divide-and-conquer algorithm that works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot.
 - **Time Complexity**:
   - Best: $$O(n \log n)$$
